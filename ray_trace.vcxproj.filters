@@ -15,13 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ray_trace.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="screen.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="point.cpp">
+    <ClCompile Include="pixel.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

@@ -140,8 +140,8 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="point.cpp" />
-    <ClCompile Include="ray_trace.cpp" />
+    <ClCompile Include="pixel.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="screen.cpp" />
   </ItemGroup>
   <ItemGroup>

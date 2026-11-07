@@ -1,48 +1,46 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include <Windows.h>
 #include <iostream>
+#include <vector>
 #include <format>
+#include <string>
+#include <immintrin.h>
+#include <Windows.h>
 
-class Point2D { // pooint.cpp
-private:
-	double x;
-	double y;
-public:
-	Point2D(double x, double y) : x(x), y(y) {}
-	~Point2D() {}
+struct Point2D {
+	float x;
+	float y;
 };
-class Point3D {
-private:
-	double x;
-	double y;
-	double z;
-public:
-	Point3D(double x, double y, double z) : x(x), y(y), z(z) {}
-	~Point3D() {}
+struct Point3D {
+	float x;
+	float y;
+	float z;
 };
 
-class Pixel { // screen.cpp
-private:
-	short x;
-	short y;
-	struct {
-		char r;
-		char g;
-		char b;
+class Pixel { // pixel.cpp
+public:
+	struct Color{
+		char red;
+		char green;
+		char blue;
 	} color;
 public:
-	Pixel(short x, short y) : x(x), y(y) {}
-	~Pixel() {}
+	Pixel(Point2D&, Color&);
+	~Pixel() = default;
 };
-class Screen {
+
+class Screen { // screen.cpp
 private:
 	short width;
 	short height;
+	std::vector<Pixel>pixels;
 public:
-	Screen(short w, short h) : width(w), height(h) {}
-	~Screen();
+	Screen(short, short);
+	void setScreen(std::vector<Pixel>&); // flush the whole screen
+	void setPixle(Pixel&, short, short); // change one pixel
+	void show(); // print to stdout
+	~Screen() = default;
 };
 
 #endif // !MAIN_H
