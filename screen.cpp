@@ -29,5 +29,6 @@ void Screen::show() {
 	static std::string temp = "\033[{},{}H\033[48,2,{},{},{}m\033[38,2,{},{},{}m\xe2\x96\x84\033[0m";
 	for (int i = 0; i < width * height; i++) {
 		// print every pixel.
+		// I still have no idea.
 	}
 }
