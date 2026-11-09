@@ -37,8 +37,9 @@ void Screen::setPixle(Pixel& p) {
 	pixels[y * width + x] = p;
 }
 void Screen::show() {
-	std::cout << "\033[2J\033[H";
+	std::cout << "\033[H";
 	for (int y = 0; y < height; y += 2) {
+		std::cout << "\033[2K";
 		for (int x = 0; x < width; x++) {
 			const Pixel& upper = pixels[y * width + x];
 			const Pixel& lower = y + 1 < height ? pixels[(y + 1) * width + x] : upper;

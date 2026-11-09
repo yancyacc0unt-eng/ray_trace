@@ -7,7 +7,7 @@ float area_of_triangle(const Point2D& A, const Point2D& B, const Point2D& C) {
 
 int main(int argc, char* argv[]) {
 	SetConsoleOutputCP(CP_UTF8);
-	//test
+
 	constexpr short width = 128;
 	constexpr short height = 72;
 	Screen screen(width, height);
@@ -26,7 +26,6 @@ int main(int argc, char* argv[]) {
 	}
 	screen.setScreen(pixels);
 	screen.show();
-	// -----------
 	/*----test----
 	Point2D A(1.0, 2.0);
 	Point2D B(-3.0, -4.0);
