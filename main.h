@@ -25,6 +25,10 @@ public:
 		char green;
 		char blue;
 	} color;
+	struct Pos {
+		short x;
+		short y;
+	} position;
 public:
 	Pixel(Point2D&, Color&);
 	~Pixel() = default;
@@ -38,7 +42,7 @@ private:
 public:
 	Screen(short, short);
 	void setScreen(std::vector<Pixel>&); // flush the whole screen
-	void setPixle(Pixel&, short, short); // change one pixel
+	void setPixle(Pixel&); // change one pixel
 	void show(); // print to stdout
 	~Screen() = default;
 };

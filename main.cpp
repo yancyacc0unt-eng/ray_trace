@@ -7,8 +7,26 @@ float area_of_triangle(const Point2D& A, const Point2D& B, const Point2D& C) {
 
 int main(int argc, char* argv[]) {
 	SetConsoleOutputCP(CP_UTF8);
-
-	Screen screen(128, 72);
+	//test
+	constexpr short width = 128;
+	constexpr short height = 72;
+	Screen screen(width, height);
+	std::vector<Pixel> pixels;
+	pixels.reserve(static_cast<size_t>(width) * height);
+	for (short y = 0; y < height; y++) {
+		for (short x = 0; x < width; x++) {
+			Point2D position{ static_cast<float>(x), static_cast<float>(y) };
+			Pixel::Color color{
+				static_cast<char>(x * 255 / (width - 1)),
+				static_cast<char>(y * 255 / (height - 1)),
+				static_cast<char>((x + y) * 255 / (width + height - 2))
+			};
+			pixels.emplace_back(position, color);
+		}
+	}
+	screen.setScreen(pixels);
+	screen.show();
+	// -----------
 	/*----test----
 	Point2D A(1.0, 2.0);
 	Point2D B(-3.0, -4.0);
@@ -19,6 +37,5 @@ int main(int argc, char* argv[]) {
 	__m256 X = { 4.0, 1.0, 144.0, 2.2276676, 256.0, 16.0, 9.0, 2.0 };
 	__m256 Y = _mm256_rsqrt_ps(X);
 	*/
-	std::cout << "128px\n72px";
 	return 0;
 }

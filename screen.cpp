@@ -10,25 +10,48 @@
 * Reset colors, use \033[0m.
 */
 Screen::Screen(short w, short h) : width(w), height(h) {
-	pixels.resize(w * h);
+	Point2D position{};
+	Pixel::Color color{};
+	pixels.reserve(static_cast<size_t>(w) * h);
+	for (int i = 0; i < w * h; i++) {
+		pixels.emplace_back(position, color);
+	}
 }
 void Screen::setScreen(std::vector<Pixel>& pxs) {
 	if (pxs.size() < pixels.size()) {
 		std::cerr << "ERROR : pixels not enough\n";
+		return;
 	}
-	else if (pxs.size() > pixels.size()) {
+	if (pxs.size() > pixels.size()) {
 		std::cerr << "ERROR : pixels overflow\n";
+		return;
 	}
-	std::clog << "ignored ERROR";
 	pixels = pxs;
 }
-void Screen::setPixle(Pixel& p, short x, short y) {
-	pixels[x + width * y] = p;
+void Screen::setPixle(Pixel& p) {
+	const int x = width / 2 + p.position.x;
+	const int y = height / 2 - p.position.y;
+	if (x < 0 || x >= width || y < 0 || y >= height) {
+		return;
+	}
+	pixels[y * width + x] = p;
 }
 void Screen::show() {
-	static std::string temp = "\033[{},{}H\033[48,2,{},{},{}m\033[38,2,{},{},{}m\xe2\x96\x84\033[0m";
-	for (int i = 0; i < width * height; i++) {
-		// print every pixel.
-		// I still have no idea.
+	std::cout << "\033[2J\033[H";
+	for (int y = 0; y < height; y += 2) {
+		for (int x = 0; x < width; x++) {
+			const Pixel& upper = pixels[y * width + x];
+			const Pixel& lower = y + 1 < height ? pixels[(y + 1) * width + x] : upper;
+			std::cout << std::format(
+				"\033[48;2;{};{};{}m\033[38;2;{};{};{}m\xe2\x96\x84",
+				static_cast<unsigned char>(upper.color.red),
+				static_cast<unsigned char>(upper.color.green),
+				static_cast<unsigned char>(upper.color.blue),
+				static_cast<unsigned char>(lower.color.red),
+				static_cast<unsigned char>(lower.color.green),
+				static_cast<unsigned char>(lower.color.blue));
+		}
+		std::cout << "\033[0m\n";
 	}
+	std::cout.flush();
 }
