@@ -7,12 +7,44 @@ float area_of_triangle(const Point2D& A, const Point2D& B, const Point2D& C) {
 
 int main(int argc, char* argv[]) {
 	SetConsoleOutputCP(CP_UTF8);
-	//-----------------------------------
+	//-----------------------------------test
 	constexpr short width = 128;
 	constexpr short height = 72;
 	Screen screen(width, height);
 	std::vector<Pixel> pixels;
 
+	for(int i = 0; i < 200; i++){
+
+	pixels.reserve(static_cast<size_t>(width) * height);
+	for (short y = 0; y < height; y++) {
+		for (short x = 0; x < width; x++) {
+			Point2D position{ static_cast<float>(x), static_cast<float>(y) };
+			Pixel::Color color{
+				static_cast<char>((x + y) * 255 / (width + height - 2)),
+				static_cast<char>(x * 255 / (width - 1)),
+				static_cast<char>(y * 255 / (height - 1))
+			};
+			pixels.emplace_back(position, color);
+		}
+	}
+	screen.setScreen(pixels);
+	screen.show();
+	pixels.clear();Sleep(33);
+	pixels.reserve(static_cast<size_t>(width) * height);
+	for (short y = 0; y < height; y++) {
+		for (short x = 0; x < width; x++) {
+			Point2D position{ static_cast<float>(x), static_cast<float>(y) };
+			Pixel::Color color{
+				static_cast<char>(x * 255 / (width - 1)),
+				static_cast<char>((x + y) * 255 / (width + height - 2)),
+				static_cast<char>(y * 255 / (height - 1))
+			};
+			pixels.emplace_back(position, color);
+		}
+	}
+	screen.setScreen(pixels);
+	screen.show();
+	pixels.clear();Sleep(33);
 	pixels.reserve(static_cast<size_t>(width) * height);
 	for (short y = 0; y < height; y++) {
 		for (short x = 0; x < width; x++) {
@@ -27,6 +59,8 @@ int main(int argc, char* argv[]) {
 	}
 	screen.setScreen(pixels);
 	screen.show();
+	pixels.clear();Sleep(33);
+		}
 	/*---------------test---------------*/
 	return 0;
 }
