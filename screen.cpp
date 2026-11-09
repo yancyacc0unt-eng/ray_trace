@@ -1,4 +1,5 @@
 #include "main.h"
+#include <charconv>
 /*
 * This class can display the results to stdout, It is the screen of the porgram.
 * "\xe2\x96\x84" is the unicode character for a half-solid block,
@@ -13,6 +14,8 @@ Screen::Screen(short w, short h) : width(w), height(h) {
 	Point2D position{};
 	Pixel::Color color{};
 	pixels.reserve(static_cast<size_t>(w) * h);
+	const size_t rowCount = static_cast<size_t>((h + 1) / 2);
+	frameBuffer.reserve(3 + rowCount * (static_cast<size_t>(w) * 43 + 9));
 	for (int i = 0; i < w * h; i++) {
 		pixels.emplace_back(position, color);
 	}
@@ -37,22 +40,33 @@ void Screen::setPixle(Pixel& p) {
 	pixels[y * width + x] = p;
 }
 void Screen::show() {
-	std::cout << "\033[H";
+	frameBuffer.clear();
+	frameBuffer.append("\033[H");
+	auto appendComponent = [this](unsigned char value) {
+		char digits[3];
+		const auto result = std::to_chars(digits, digits + sizeof(digits), static_cast<unsigned int>(value));
+		frameBuffer.append(digits, static_cast<size_t>(result.ptr - digits));
+	};
+	auto appendColor = [this, &appendComponent](const Pixel::Color& color, const char* prefix) {
+		frameBuffer.append(prefix);
+		appendComponent(static_cast<unsigned char>(color.red));
+		frameBuffer.push_back(';');
+		appendComponent(static_cast<unsigned char>(color.green));
+		frameBuffer.push_back(';');
+		appendComponent(static_cast<unsigned char>(color.blue));
+		frameBuffer.push_back('m');
+	};
 	for (int y = 0; y < height; y += 2) {
-		std::cout << "\033[2K";
+		frameBuffer.append("\033[2K");
 		for (int x = 0; x < width; x++) {
 			const Pixel& upper = pixels[y * width + x];
 			const Pixel& lower = y + 1 < height ? pixels[(y + 1) * width + x] : upper;
-			std::cout << std::format(
-				"\033[48;2;{};{};{}m\033[38;2;{};{};{}m\xe2\x96\x84",
-				static_cast<unsigned char>(upper.color.red),
-				static_cast<unsigned char>(upper.color.green),
-				static_cast<unsigned char>(upper.color.blue),
-				static_cast<unsigned char>(lower.color.red),
-				static_cast<unsigned char>(lower.color.green),
-				static_cast<unsigned char>(lower.color.blue));
+			appendColor(upper.color, "\033[48;2;");
+			appendColor(lower.color, "\033[38;2;");
+			frameBuffer.append("\xe2\x96\x84");
 		}
-		std::cout << "\033[0m\n";
+		frameBuffer.append("\033[0m\n");
 	}
+	std::cout.write(frameBuffer.data(), static_cast<std::streamsize>(frameBuffer.size()));
 	std::cout.flush();
 }

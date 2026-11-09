@@ -39,6 +39,7 @@ private:
 	short width;
 	short height;
 	std::vector<Pixel>pixels;
+	std::string frameBuffer;
 public:
 	Screen(short, short);
 	void setScreen(std::vector<Pixel>&); // flush the whole screen
