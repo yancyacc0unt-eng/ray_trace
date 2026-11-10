@@ -48,4 +48,16 @@ public:
 	~Screen() = default;
 };
 
+class Triangle { // triangle.cpp
+private:
+	Point2D A;
+	Point2D B;
+	Point2D C;
+public:
+	Triangle(Point2D&, Point2D&, Point2D&);
+	float area();
+	Point2D center();
+	~Triangle() = default;
+};
+
 #endif // !MAIN_H

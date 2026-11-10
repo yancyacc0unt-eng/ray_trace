@@ -1,4 +1,7 @@
 ﻿#include "main.h"
+/*
+* This file contains the program entry point and triangle area calculation.
+*/
 
 float area_of_triangle(const Point2D& A, const Point2D& B, const Point2D& C) {
 	// Calculate the area of the triangle using the shoelace formula

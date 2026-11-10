@@ -41,12 +41,14 @@ void Screen::setPixle(Pixel& p) {
 }
 void Screen::show() {
 	frameBuffer.clear();
+	// Move the cursor to the home position before drawing the next frame.
 	frameBuffer.append("\033[H");
 	auto appendComponent = [this](unsigned char value) {
 		char digits[3];
 		const auto result = std::to_chars(digits, digits + sizeof(digits), static_cast<unsigned int>(value));
 		frameBuffer.append(digits, static_cast<size_t>(result.ptr - digits));
 	};
+	// Append an ANSI true-color sequence using the supplied foreground/background prefix.
 	auto appendColor = [this, &appendComponent](const Pixel::Color& color, const char* prefix) {
 		frameBuffer.append(prefix);
 		appendComponent(static_cast<unsigned char>(color.red));
@@ -60,6 +62,7 @@ void Screen::show() {
 		frameBuffer.append("\033[2K");
 		for (int x = 0; x < width; x++) {
 			const Pixel& upper = pixels[y * width + x];
+			// The lower-half block uses its background for the upper pixel and foreground for the lower one.
 			const Pixel& lower = y + 1 < height ? pixels[(y + 1) * width + x] : upper;
 			appendColor(upper.color, "\033[48;2;");
 			appendColor(lower.color, "\033[38;2;");
@@ -67,6 +70,7 @@ void Screen::show() {
 		}
 		frameBuffer.append("\033[0m\n");
 	}
+	// Write the completed frame in one batch, then flush it to the terminal.
 	std::cout.write(frameBuffer.data(), static_cast<std::streamsize>(frameBuffer.size()));
 	std::cout.flush();
 }

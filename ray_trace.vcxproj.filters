@@ -24,6 +24,9 @@
     <ClCompile Include="pixel.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="triangle.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
