@@ -8,15 +8,17 @@
 #include <immintrin.h>
 #include <Windows.h>
 
-struct Point2D {
-	float x;
-	float y;
-};
-struct Point3D {
-	float x;
-	float y;
-	float z;
-};
+namespace LinearAlgebra {
+	struct Point2D {
+		float x;
+		float y;
+	};
+	struct Point3D {
+		float x;
+		float y;
+		float z;
+	};
+}
 
 class Pixel { // pixel.cpp
 public:
@@ -24,13 +26,14 @@ public:
 		char red;
 		char green;
 		char blue;
-	} color;
+	} color{};
 	struct Pos {
 		short x;
 		short y;
-	} position;
+	} position{};
 public:
-	Pixel(Point2D&, Color&);
+	Pixel() = default;
+	Pixel(LinearAlgebra::Point2D&, Color&);
 	~Pixel() = default;
 };
 
@@ -50,13 +53,13 @@ public:
 
 class Triangle { // triangle.cpp
 private:
-	Point2D A;
-	Point2D B;
-	Point2D C;
+	LinearAlgebra::Point2D A;
+	LinearAlgebra::Point2D B;
+	LinearAlgebra::Point2D C;
 public:
-	Triangle(Point2D&, Point2D&, Point2D&);
+	Triangle(LinearAlgebra::Point2D&, LinearAlgebra::Point2D&, LinearAlgebra::Point2D&);
 	float area();
-	Point2D center();
+	LinearAlgebra::Point2D center();
 	~Triangle() = default;
 };
 

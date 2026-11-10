@@ -140,6 +140,7 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="math.cpp" />
     <ClCompile Include="pixel.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="screen.cpp" />

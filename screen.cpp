@@ -11,7 +11,7 @@
 * Reset colors, use \033[0m.
 */
 Screen::Screen(short w, short h) : width(w), height(h) {
-	Point2D position{};
+	LinearAlgebra::Point2D position{};
 	Pixel::Color color{};
 	pixels.reserve(static_cast<size_t>(w) * h);
 	const size_t rowCount = static_cast<size_t>((h + 1) / 2);
