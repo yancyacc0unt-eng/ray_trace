@@ -8,7 +8,7 @@
 #include <immintrin.h>
 #include <Windows.h>
 
-namespace LinearAlgebra {
+namespace LinearAlgebra { //math.cpp
 	struct Point2D {
 		float x;
 		float y;
