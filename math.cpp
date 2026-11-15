@@ -1,7 +1,10 @@
 #include "main.h"
+/*
+ * This file implements arithmetic and geometric operations for 2D and 3D vectors.
+*/
 
 namespace LinearAlgebra {
-	// struct vector2D
+	// vector2D arithmetic operators
 	vector2D vector2D::operator+(const vector2D& v) const {
 		return {
 			x + v.x,
@@ -54,7 +57,7 @@ namespace LinearAlgebra {
 		return *this;
 	}
 	
-	// struct vector3D
+	// vector3D arithmetic operators
 	vector3D vector3D::operator+(const vector3D& v) const {
 		return {
 			x + v.x,
@@ -116,7 +119,7 @@ namespace LinearAlgebra {
 		return *this;
 	}
 
-	// other operations
+	// Scalar multiplication overloads and vector dot and cross products.
 	vector2D operator*(float s, const vector2D& v) {
 		return v * s;
 	}
