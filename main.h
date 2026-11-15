@@ -9,8 +9,9 @@
 #include <vector>
 #include <format>
 #include <string>
-#include <immintrin.h>
+#include <tuple>
 #include <Windows.h>
+__declspec(dllimport) std::vector<std::tuple<uint8_t, uint8_t, uint8_t, short, short>> getFrame();
 
 // Provides vector types and common vector operations.
 namespace LinearAlgebra { //math.cpp

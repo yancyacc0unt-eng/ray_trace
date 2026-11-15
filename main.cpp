@@ -3,9 +3,6 @@
  * This file contains the program entry point.
 */
 
-#include <tuple>
-__declspec(dllimport) std::vector<std::tuple<uint8_t, uint8_t, uint8_t, short, short>> getFrame();
-
 int main(int argc, char* argv[]) {
 	SetConsoleOutputCP(CP_UTF8);
 
