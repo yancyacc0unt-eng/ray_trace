@@ -150,8 +150,8 @@
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Dll\Dll.vcxproj">
-      <Project>{ea9f1940-ffb6-4d75-b653-fb9e1f4b4da9}</Project>
+    <ProjectReference Include="Dll\Dll.vcxproj">
+      <Project>{f9dcf03d-9354-4ff3-aab0-971b1ecc3702}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
