@@ -10,8 +10,11 @@
 #include <format>
 #include <string>
 #include <tuple>
+#include <charconv>
 #include <Windows.h>
-__declspec(dllimport) std::vector<std::tuple<uint8_t, uint8_t, uint8_t, short, short>> getFrame();
+
+// returns 1024 * 576 frame
+__declspec(dllimport) std::vector<std::tuple<uint8_t, uint8_t, uint8_t>> __cdecl getFrame();
 
 // Provides vector types and common vector operations.
 namespace LinearAlgebra { //math.cpp
