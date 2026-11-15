@@ -2,7 +2,7 @@
 /*
 * This file contains the implementation of triangle-related functionality.
 */
-Triangle::Triangle(LinearAlgebra::Point2D& a, LinearAlgebra::Point2D& b, LinearAlgebra::Point2D& c) {
+Triangle::Triangle(LinearAlgebra::vector2D& a, LinearAlgebra::vector2D& b, LinearAlgebra::vector2D& c) {
 	A = a;
 	B = b;
 	C = c;

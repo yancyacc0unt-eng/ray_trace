@@ -11,6 +11,7 @@ int main(int argc, char* argv[]) {
 
 	constexpr short width = 256;
 	constexpr short height = 144;
+
 	Screen screen(width, height);
 	std::vector<Pixel> frame;
 	// --------test--------
@@ -18,7 +19,7 @@ int main(int argc, char* argv[]) {
 	for (int i = 0; i < height; ++i) {
 		for (int j = 0; j < width; ++j) {
 			auto [r, g, b, x, y] = pixels[i * width + j];
-			LinearAlgebra::Point2D pos{ x,y };
+			LinearAlgebra::vector2D pos{ x,y };
 			Pixel::Color col{ r,g,b };
 			Pixel p(pos, col);
 			frame.push_back(p);
