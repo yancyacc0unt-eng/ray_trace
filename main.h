@@ -12,7 +12,6 @@
 #include <immintrin.h>
 #include <Windows.h>
 
-
 // Provides vector types and common vector operations.
 namespace LinearAlgebra { //math.cpp
 	// Represents a vector in two-dimensional space.
