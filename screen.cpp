@@ -9,6 +9,7 @@
 * Setting background RGB, use \033[48;2;R;G;Bm.
 * Reset colors, use \033[0m.
 */
+
 Screen::Screen(short w, short h) : width(w), height(h) {
 	LinearAlgebra::vector2D position{};
 	Pixel::Color color{};
@@ -60,8 +61,8 @@ void Screen::show() {
 	for (int y = 0; y < height; y += 2) {
 		frameBuffer.append("\033[2K");
 		for (int x = 0; x < width; x++) {
-			const Pixel& upper = pixels[y * width + x];
 			// The lower-half block uses its background for the upper pixel and foreground for the lower one.
+			const Pixel& upper = pixels[y * width + x];
 			const Pixel& lower = y + 1 < height ? pixels[(y + 1) * width + x] : upper;
 			appendColor(upper.color, "\033[48;2;");
 			appendColor(lower.color, "\033[38;2;");
@@ -72,4 +73,9 @@ void Screen::show() {
 	// Write the completed frame in one batch, then flush it to the terminal.
 	std::cout.write(frameBuffer.data(), static_cast<std::streamsize>(frameBuffer.size()));
 	std::cout.flush();
+}
+
+Pixel::Pixel(LinearAlgebra::vector2D& p, Color& c) : color(c) {
+	position.x = p.x;
+	position.y = p.y;
 }

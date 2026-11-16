@@ -141,10 +141,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="math.cpp" />
-    <ClCompile Include="pixel.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="screen.cpp" />
-    <ClCompile Include="triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h" />
