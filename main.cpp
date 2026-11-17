@@ -3,6 +3,32 @@
  * This file contains the program entry point.
 */
 
+bool intersect(Ray& line, Sphere& ball, float& result) {
+	auto a = LA::dot(line.getDirection(), line.getDirection());
+	auto b = LA::dot((2 * line.getDirection()), (line.getOrigin() - ball.getCenter()));
+	auto c = (line.getOrigin() - ball.getCenter()).length();c = c * c - ball.getRadius() * ball.getRadius();
+
+	float t1 = (-b + std::sqrt(b * b - 4.0f * a * c)) / (2.0f * a);
+	float t2 = (-b - std::sqrt(b * b - 4.0f * a * c)) / (2.0f * a);
+
+	if (t1 >= 0 && t2 >= 0) {
+		result = min(t1, t2);
+		return true;
+	}
+	else if (t1 >= 0) {
+		result = t1;
+		return true;
+	}
+	else if (t2 >= 0) {
+		result = t2;
+		return true;
+	}
+	else {
+		result = INFINITE;
+		return false;
+	}
+}
+
 int main(int argc, char* argv[]) {
 	SetConsoleOutputCP(CP_UTF8);
 
@@ -25,31 +51,17 @@ int main(int argc, char* argv[]) {
 	LA::vector3D d(x, y, z);
 	Ray line(o, d);
 
-	auto a = LA::dot(line.getDirection(), line.getDirection());
-	auto b = LA::dot((2 * line.getDirection()), (line.getOrigin() - ball.getCenter()));
-	auto c = (line.getOrigin() - ball.getCenter()).length();c = c * c - ball.getRadius() * ball.getRadius();
-
-	float t1 = (-b + std::sqrt(b * b - 4.0f * a * c)) / (2.0f * a);
-	float t2 = (-b - std::sqrt(b * b - 4.0f * a * c)) / (2.0f * a);
-
 	float result = 0;
-	if (t1 > 0 && t2 > 0) {
-		result = min(t1, t2);
-	}
-	else if (t1 > 0) {
-		result = t1;
-	}
-	else if (t2 > 0) {
-		result = t2;
+	bool meet = intersect(line, ball, result);
+	if (meet) {
+		std::cout << "meeting point:\nx:    y:    z:\n";
+		std::cout << line.at(result).x << "  ";
+		std::cout << line.at(result).y << "  ";
+		std::cout << line.at(result).z << "  ";
 	}
 	else {
-		result = INFINITE;
+		std::cout << "dose not meet !";
 	}
-
-	std::cout << "meeting point:\nx:    y:    z:\n";
-	std::cout << line.at(result).x << "  ";
-	std::cout << line.at(result).y << "  ";
-	std::cout << line.at(result).z << "  ";
 	// --------test--------
 	return 0;
 }
