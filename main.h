@@ -110,8 +110,8 @@ private:
 	float radius;
 public:
 	Sphere(LA::vector3D&, float);
-	LA::vector3D getCenter();
-	float getRadius();
+	LA::vector3D getCenter() const;
+	float getRadius() const;
 	~Sphere() = default;
 };
 
@@ -122,8 +122,8 @@ private:
 public:
 	Ray(LA::vector3D& o, LA::vector3D& d);
 	LA::vector3D at(float);
-	LA::vector3D getOrigin();
-	LA::vector3D getDirection();
+	LA::vector3D getOrigin() const;
+	LA::vector3D getDirection() const;
 	~Ray() = default;
 };
 

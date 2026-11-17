@@ -3,7 +3,7 @@
  * This file contains the program entry point.
 */
 
-bool intersect(Ray& line, Sphere& ball, float& result) {
+bool intersect(const Ray& line, const Sphere& ball, float& result) {
 	auto a = LA::dot(line.getDirection(), line.getDirection());
 	auto b = LA::dot((2 * line.getDirection()), (line.getOrigin() - ball.getCenter()));
 	auto c = (line.getOrigin() - ball.getCenter()).length();c = c * c - ball.getRadius() * ball.getRadius();
@@ -68,13 +68,13 @@ int main(int argc, char* argv[]) {
 
 Sphere::Sphere(LA::vector3D& c, float r) : center(c), radius(r) {
 }
-LA::vector3D Sphere::getCenter() { return center; }
-float Sphere::getRadius() { return radius; }
+LA::vector3D Sphere::getCenter() const { return center; }
+float Sphere::getRadius() const { return radius; }
 
 Ray::Ray(LA::vector3D& o, LA::vector3D& d) : origin(o), direction(d) {
 }
 LA::vector3D Ray::at(float time) {
 	return origin + time * direction;
 }
-LA::vector3D Ray::getOrigin() { return origin; }
-LA::vector3D Ray::getDirection() { return direction; }
+LA::vector3D Ray::getOrigin() const { return origin; }
+LA::vector3D Ray::getDirection() const { return direction; }
