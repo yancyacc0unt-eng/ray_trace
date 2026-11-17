@@ -56,6 +56,10 @@ namespace LinearAlgebra {
 		y /= s;
 		return *this;
 	}
+
+	float vector2D::length() const {
+		return std::sqrt(x * x + y * y);
+	}
 	
 	// vector3D arithmetic operators
 	vector3D vector3D::operator+(const vector3D& v) const {
@@ -117,6 +121,10 @@ namespace LinearAlgebra {
 		y /= s;
 		z /= s;
 		return *this;
+	}
+
+	float vector3D::length() const {
+		return std::sqrt(x * x + y * y + z * z);
 	}
 
 	// Scalar multiplication overloads and vector dot and cross products.

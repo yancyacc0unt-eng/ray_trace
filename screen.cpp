@@ -11,7 +11,7 @@
 */
 
 Screen::Screen(short w, short h) : width(w), height(h) {
-	LinearAlgebra::vector2D position{};
+	LA::vector2D position{};
 	Pixel::Color color{};
 	pixels.reserve(static_cast<size_t>(w) * h);
 	const size_t rowCount = static_cast<size_t>((h + 1) / 2);
@@ -75,7 +75,7 @@ void Screen::show() {
 	std::cout.flush();
 }
 
-Pixel::Pixel(LinearAlgebra::vector2D& p, Color& c) : color(c) {
+Pixel::Pixel(LA::vector2D& p, Color& c) : color(c) {
 	position.x = p.x;
 	position.y = p.y;
 }

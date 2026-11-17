@@ -34,6 +34,8 @@ namespace LinearAlgebra { //math.cpp
 		vector2D& operator-=(const vector2D& v);
 		vector2D& operator*=(float s);
 		vector2D& operator/=(float s);
+
+		float length() const;
 	};
 	// Represents a vector in three-dimensional space.
 	struct vector3D {
@@ -53,6 +55,8 @@ namespace LinearAlgebra { //math.cpp
 		vector3D& operator-=(const vector3D& v);
 		vector3D& operator*=(float s);
 		vector3D& operator/=(float s);
+
+		float length() const;
 	};
 
 	// Support scalar multiplication with the scalar on the left.
@@ -67,8 +71,9 @@ namespace LinearAlgebra { //math.cpp
 	float cross(const vector2D& v1, const vector2D& v2);
 	vector3D cross(const vector3D& v1, const vector3D& v2);
 }
+namespace LA = LinearAlgebra;
 
-class Pixel { // pixel.cpp
+class Pixel { // screen.cpp
 public:
 	struct Color{
 		char red;
@@ -81,11 +86,11 @@ public:
 	} position{};
 public:
 	Pixel() = default;
-	Pixel(LinearAlgebra::vector2D&, Color&);
+	Pixel(LA::vector2D&, Color&);
 	~Pixel() = default;
 };
 
-class Screen { // screen.cpp
+class Screen {
 private:
 	short width;
 	short height;
@@ -97,6 +102,29 @@ public:
 	void setPixle(Pixel&);               // Update one pixel in the screen buffer.
 	void show();                         // Render the screen to standard output.
 	~Screen() = default;
+};
+
+class Sphere {
+private:
+	LA::vector3D center;
+	float radius;
+public:
+	Sphere(LA::vector3D&, float);
+	LA::vector3D getCenter();
+	float getRadius();
+	~Sphere() = default;
+};
+
+class Ray {
+private:
+	LA::vector3D origin;
+	LA::vector3D direction;
+public:
+	Ray(LA::vector3D& o, LA::vector3D& d);
+	LA::vector3D at(float);
+	LA::vector3D getOrigin();
+	LA::vector3D getDirection();
+	~Ray() = default;
 };
 
 #endif // !MAIN_H
