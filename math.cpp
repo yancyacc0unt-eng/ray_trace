@@ -1,6 +1,6 @@
 #include "main.h"
 /*
- * This file implements arithmetic and geometric operations for 2D and 3D vectors.
+* This file implements arithmetic and geometric operations for 2D and 3D vectors.
 */
 
 namespace LinearAlgebra {

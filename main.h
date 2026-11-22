@@ -100,7 +100,7 @@ public:
 	Screen(short, short);
 	void setScreen(std::vector<Pixel>&); // Replace the screen's pixel buffer.
 	void setPixle(Pixel&);               // Update one pixel in the screen buffer.
-	void show();                         // Render the screen to standard output.
+	void show();
 	~Screen() = default;
 };
 

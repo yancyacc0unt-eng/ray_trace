@@ -1,5 +1,6 @@
 #include "main.h"
 /*
+* This file implements a simple screen that preforms very well.
 * This class can display the results to stdout, It is the screen of the porgram.
 * "\xe2\x96\x84" is the unicode character for a half-solid block,
 * which it's foreground can be used as a pixel in odd rows,
