@@ -4,13 +4,14 @@
 */
 
 bool intersect(const Ray& line, const Sphere& ball, float& result) {
+	// calculate abc
 	auto a = LA::dot(line.getDirection(), line.getDirection());
 	auto b = LA::dot((2 * line.getDirection()), (line.getOrigin() - ball.getCenter()));
 	auto c = (line.getOrigin() - ball.getCenter()).length();c = c * c - ball.getRadius() * ball.getRadius();
-
+	// get the root
 	float t1 = (-b + std::sqrt(b * b - 4.0f * a * c)) / (2.0f * a);
 	float t2 = (-b - std::sqrt(b * b - 4.0f * a * c)) / (2.0f * a);
-
+	// get the neerest meeting point
 	if (t1 >= 0 && t2 >= 0) {
 		result = min(t1, t2);
 		return true;
@@ -65,12 +66,13 @@ int main(int argc, char* argv[]) {
 	// --------test--------
 	return 0;
 }
-
+// -------- class implemention --------
+//----
 Sphere::Sphere(LA::vector3D& c, float r) : center(c), radius(r) {
 }
 LA::vector3D Sphere::getCenter() const { return center; }
 float Sphere::getRadius() const { return radius; }
-
+//----
 Ray::Ray(LA::vector3D& o, LA::vector3D& d) : origin(o), direction(d) {
 }
 LA::vector3D Ray::at(float time) {
