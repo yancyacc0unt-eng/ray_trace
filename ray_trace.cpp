@@ -1,6 +1,7 @@
 ﻿#include "main.h"
 /*
- * This file contains the program entry point.
+* This file contains the program entry point.
+* And ... Somtimes with a little bit of tests.
 */
 
 bool intersect(const Ray& line, const Sphere& ball, float& result) {

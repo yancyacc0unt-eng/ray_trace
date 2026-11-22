@@ -1,10 +1,10 @@
-/*
- * This project is an in-progress exploration of building a ray-tracing
- * application. It currently provides foundational vector math, pixel and
- * screen abstractions, and basic triangle geometry; rendering and other
- * features are still under development.
- */
 #ifndef MAIN_H
+/*
+* This project is an in-progress exploration of building a ray-tracing application.
+* It currently provides foundational vector math,
+* pixel andscreen abstractions, and basic triangle geometry;
+* rendering and other features are still under development.
+*/
 #define MAIN_H
 
 #include <iostream>
