@@ -1,4 +1,5 @@
 ﻿#include "main.h"
+#include <chrono>
 /*
 * This file contains the program entry point.
 * And ... Somtimes with a little bit of tests.
@@ -39,7 +40,7 @@ int main(int argc, char* argv[]) {
 
 	Screen screen(width, height);
 	std::vector<Pixel> frame;
-	// --------test--------
+	/* --------test--------
 	float x, y, z, r;
 	std::cout << "ball    x:    y:    z:    r:\n";
 	std::cin >> x >> y >> z >> r;
@@ -64,7 +65,47 @@ int main(int argc, char* argv[]) {
 	else {
 		std::cout << "dose not meet !";
 	}
-	// --------test--------
+	// --------test--------*/
+	constexpr float topX = 0.0f;
+	constexpr float topY = 54.0f;
+	constexpr float leftX = -52.0f;
+	constexpr float leftY = -54.0f;
+	constexpr float rightX = 52.0f;
+	constexpr float rightY = -54.0f;
+	constexpr float denominator = (leftY - rightY) * (topX - rightX) +
+		(rightX - leftX) * (topY - rightY);
+
+	for (int y = 0; y < height; ++y) {
+		const float pointY = static_cast<float>(height / 2 - y);
+		for (int x = 0; x < width; ++x) {
+			const float pointX = static_cast<float>(x - width / 2);
+			const float redWeight = ((leftY - rightY) * (pointX - rightX) +
+				(rightX - leftX) * (pointY - rightY)) / denominator;
+			const float greenWeight = ((rightY - topY) * (pointX - rightX) +
+				(topX - rightX) * (pointY - rightY)) / denominator;
+			const float blueWeight = 1.0f - redWeight - greenWeight;
+			if (redWeight < 0.0f || greenWeight < 0.0f || blueWeight < 0.0f) {
+				continue;
+			}
+
+			LA::vector2D position{ static_cast<float>(pointX), pointY };
+			Pixel::Color color{
+				static_cast<char>(static_cast<unsigned char>(255.0f * redWeight)),
+				static_cast<char>(static_cast<unsigned char>(255.0f * greenWeight)),
+				static_cast<char>(static_cast<unsigned char>(255.0f * blueWeight))
+			};
+			Pixel pixel(position, color);
+			screen.setPixle(pixel);
+		}
+	}
+
+	const auto outputStart = std::chrono::steady_clock::now();
+	for (int frame = 0; frame < 10; ++frame) {
+		screen.show();
+	}
+	const auto outputElapsed = std::chrono::steady_clock::now() - outputStart;
+	std::cerr << "10 terminal frames: "
+		<< std::chrono::duration<double>(outputElapsed).count() << " s\n";
 	return 0;
 }
 // -------- class implemention --------
