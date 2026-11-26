@@ -100,11 +100,11 @@ int main(int argc, char* argv[]) {
 	}
 
 	const auto outputStart = std::chrono::steady_clock::now();
-	for (int frame = 0; frame < 10; ++frame) {
+	for (int frame = 0; frame < 16; ++frame) {
 		screen.show();
 	}
 	const auto outputElapsed = std::chrono::steady_clock::now() - outputStart;
-	std::cerr << "10 terminal frames: "
+	std::cerr << "16 terminal frames: "
 		<< std::chrono::duration<double>(outputElapsed).count() << " s\n";
 	return 0;
 }
