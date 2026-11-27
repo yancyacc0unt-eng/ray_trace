@@ -108,6 +108,7 @@ int main(int argc, char* argv[]) {
 		<< std::chrono::duration<double>(outputElapsed).count() << " s\n";
 	return 0;
 }
+// will remove them to another cpp file later.
 // -------- class implemention --------
 //----
 Sphere::Sphere(LA::vector3D& c, float r) : center(c), radius(r) {
